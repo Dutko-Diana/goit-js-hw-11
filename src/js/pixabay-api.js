@@ -19,8 +19,9 @@ export function fetchImages(value) {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
+      console.log(response);
+
       return response.json();
     })
-    .then(data => list.insertAdjacentHTML('beforeend', renderImages(data.hits)))
     .catch(error => console.log(error.message));
 }

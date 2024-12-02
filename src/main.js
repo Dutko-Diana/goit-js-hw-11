@@ -26,8 +26,8 @@ function submitForm(event) {
   }
 
   const value = event.currentTarget.elements.search.value.trim();
-  //   localStorage.setItem('value', value);
 
-  fetchImages(value);
-  renderImages();
+  fetchImages(value).then(res => console.log(res));
+
+  // renderImages();
 }
