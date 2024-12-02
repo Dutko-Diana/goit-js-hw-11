@@ -22,7 +22,6 @@ export function fetchImages() {
       return response.json();
     })
     .then(data => {
-      console.log(data);
       if (data.total === 0) {
         iziToast.error({
           position: 'topRight',
@@ -30,6 +29,7 @@ export function fetchImages() {
             'Sorry, there are no images matching your search query. Please try again!',
         });
       }
+      localStorage.setItem('objectForRendering', JSON.stringify(data));
     })
     .catch(error => console.log(error.message));
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 import { fetchImages } from './js/pixabay-api';
+import { renderImages } from './js/render-functions';
 
 const form = document.querySelector('.form');
 export const input = document.querySelector('.input');
@@ -21,4 +22,5 @@ function submitForm(event) {
   localStorage.setItem('value', value);
 
   fetchImages();
+  renderImages();
 }
