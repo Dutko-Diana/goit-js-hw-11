@@ -1,4 +1,5 @@
-import { input } from '../main';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const API_KEY = '47411566-1fe68ca00fdccc973e940a4de';
 
@@ -20,6 +21,15 @@ export function fetchImages() {
       }
       return response.json();
     })
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+      if (data.total === 0) {
+        iziToast.error({
+          position: 'topRight',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
+      }
+    })
     .catch(error => console.log(error.message));
 }

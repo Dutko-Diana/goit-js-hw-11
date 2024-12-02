@@ -6,6 +6,8 @@ const form = document.querySelector('.form');
 export const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 
+input.value = localStorage.getItem('value');
+
 form.addEventListener('submit', submitForm);
 
 function submitForm(event) {
