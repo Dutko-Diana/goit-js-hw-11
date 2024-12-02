@@ -1,11 +1,5 @@
-import { renderImages } from './render-functions';
-
-const API_KEY = '47411566-1fe68ca00fdccc973e940a4de';
-const list = document.querySelector('.list');
-
 export function fetchImages(value) {
-  //   const value = localStorage.getItem('value');
-
+  const API_KEY = '47411566-1fe68ca00fdccc973e940a4de';
   const params = new URLSearchParams({
     key: API_KEY,
     q: value,
@@ -14,14 +8,11 @@ export function fetchImages(value) {
     safesearch: true,
   });
 
-  fetch(`https://pixabay.com/api/?${params}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      console.log(response);
+  return fetch(`https://pixabay.com/api/?${params}`).then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
-      return response.json();
-    })
-    .catch(error => console.log(error.message));
+    return response.json();
+  });
 }
