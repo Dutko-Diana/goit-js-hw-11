@@ -10,7 +10,7 @@ export function renderImages(arr) {
         comments,
         downloads,
       }) => `
-      <li class="list-item">
+      <a href="${largeImageURL}" class="list-item">
       <div class="thumb"><img src="${webformatURL}" alt="${tags}" class="list-img"></div>
       <ul class="info-box">
       <li class="info-item">
@@ -30,7 +30,7 @@ export function renderImages(arr) {
       <p class="info-amount">${downloads}</p>
       </li>
       </ul>
-      </li>
+      </a>
         `
     )
     .join('');

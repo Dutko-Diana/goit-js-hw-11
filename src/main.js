@@ -2,17 +2,24 @@ import { fetchImages } from './js/pixabay-api';
 import { renderImages } from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.form');
-export const input = document.querySelector('.input');
 const list = document.querySelector('.list');
+const loading = document.querySelector('.loader');
 
 form.addEventListener('submit', submitForm);
 
 function submitForm(event) {
   event.preventDefault();
 
+  loading.style.display = 'inline-block';
+
+  list.innerHTML = '';
+
   if (event.currentTarget.elements.search.value.trim() === '') {
+    loading.style.display = 'none';
     clearGallery();
     return;
   }
@@ -22,12 +29,15 @@ function submitForm(event) {
   fetchImages(value)
     .then(data => {
       if (data.total === 0) {
+        loading.style.display = 'none';
         clearGallery();
       }
 
-      list.innerHTML = '';
+      loading.style.display = 'none';
 
       list.insertAdjacentHTML('afterbegin', renderImages(data.hits));
+
+      initSimpleLightbox();
     })
     .catch(error => console.log(error.statusText));
 }
@@ -40,4 +50,14 @@ function clearGallery() {
     maxWidth: 432,
   });
   list.innerHTML = '';
+}
+
+function initSimpleLightbox() {
+  const lightbox = new SimpleLightbox('.list-item', {
+    captions: true,
+    captionsData: 'alt',
+    captionDelay: 150,
+  });
+
+  lightbox.refresh();
 }
