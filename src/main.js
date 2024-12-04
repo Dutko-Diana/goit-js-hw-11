@@ -39,7 +39,14 @@ function submitForm(event) {
 
       initSimpleLightbox();
     })
-    .catch(error => console.log(error.statusText));
+    .catch(error => {
+      loading.style.display = 'none';
+      iziToast.error({
+        position: 'topRight',
+        message: error.message,
+        maxWidth: 432,
+      });
+    });
 }
 
 function clearGallery() {
